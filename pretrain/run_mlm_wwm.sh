@@ -1,0 +1,19 @@
+nohup python mlm_wwm.py \
+        --model_name_or_path bert-base-uncased \
+        --train_file ../data/processed/Jira_issues.csv \
+        --do_train \
+        --do_eval \
+        --per_device_train_batch_size 16 \
+        --gradient_accumulation_steps 2 \
+        --per_device_eval_batch_size 16 \
+        --output_dir ../tmp/tldbert \
+        --evaluation_strategy steps \
+        --logging_steps 2000 \
+        --save_steps 2000 \
+        --fp16 \
+        --warmup_steps 100 \
+        --num_train_epochs 1 \
+        --learning_rate 3e-5 \
+        --weight_decay 1e-3 \
+        --adam_epsilon 1e-6 \
+        --load_best_model_at_end > ../tmp/log/tldbert_mlm_wwm_run.log 2>&1 &
